@@ -13,7 +13,8 @@ class DegreesByHoursTVCell: UITableViewCell {
         didSet {
             collectionView?.delegate = self
             collectionView?.dataSource = self
-            collectionView?.register(UINib(nibName: "DegreesHourCVCell", bundle: nil), forCellWithReuseIdentifier: "DegreesHourCVCell")
+            collectionView?.register(UINib(nibName: "DegreesHourCVCell", bundle: nil),
+                                     forCellWithReuseIdentifier: "DegreesHourCVCell")
         }
     }
     var viewModel: DegreesByHoursTVModel! {
@@ -42,7 +43,8 @@ extension DegreesByHoursTVCell: UICollectionViewDelegate, UICollectionViewDataSo
         return collectionView.dequeueReusableCell(withModel: modelCell, for: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 50, height: collectionView.frame.height)
     }
 }

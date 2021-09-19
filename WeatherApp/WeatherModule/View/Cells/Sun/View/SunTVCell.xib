@@ -29,7 +29,7 @@
                                             <constraint firstAttribute="height" constant="54" id="rvu-mT-U8U"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99:99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QX-06-NNb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="99:99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QX-06-NNb">
                                         <rect key="frame" x="0.0" y="62" width="54" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="flv-bt-kre"/>
@@ -39,6 +39,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="AB7-yh-zq5"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bo1-Ie-50t">
                                 <rect key="frame" x="154" y="0.0" width="54" height="82"/>
@@ -50,7 +53,7 @@
                                             <constraint firstAttribute="width" constant="54" id="qt6-B3-wg3"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99:99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8YI-is-liF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="99:99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8YI-is-liF">
                                         <rect key="frame" x="0.0" y="62" width="54" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="dF5-zT-ZKg"/>
@@ -62,13 +65,15 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="82" id="Dgf-ae-FAu"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ia5-8G-z4b" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="3dd-7b-Ldu"/>
                     <constraint firstItem="Ia5-8G-z4b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="jOP-o5-Eot"/>
-                    <constraint firstItem="Ia5-8G-z4b" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ttU-XK-ZId"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Ia5-8G-z4b" secondAttribute="bottom" constant="18" id="v4j-BU-rde"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ia5-8G-z4b" secondAttribute="bottom" priority="999" constant="18" id="v4j-BU-rde"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

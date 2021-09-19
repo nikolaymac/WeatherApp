@@ -413,16 +413,23 @@ struct _R: Rswift.Validatable {
       typealias InitialController = WeatherViewController
 
       let bundle = R.hostingBundle
+      let errorViewController = StoryboardViewControllerResource<ErrorViewController>(identifier: "ErrorViewController")
       let name = "Main"
       let weatherViewController = StoryboardViewControllerResource<WeatherViewController>(identifier: "WeatherViewController")
+
+      func errorViewController(_: Void = ()) -> ErrorViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: errorViewController)
+      }
 
       func weatherViewController(_: Void = ()) -> WeatherViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: weatherViewController)
       }
 
       static func validate() throws {
+        if UIKit.UIImage(named: "background", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'background' is used in storyboard 'Main', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.main().errorViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'errorViewController' could not be loaded from storyboard 'Main' as 'ErrorViewController'.") }
         if _R.storyboard.main().weatherViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'weatherViewController' could not be loaded from storyboard 'Main' as 'WeatherViewController'.") }
       }
 

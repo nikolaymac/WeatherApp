@@ -22,13 +22,6 @@ extension UICollectionView {
             self.register(nib, forCellWithReuseIdentifier: identifier)
         }
     }
-//    func dequeueReusableCell(withModel model: CellViewAnyModel, for indexPath: IndexPath, classCell: UITableViewCell.Type) -> UITableViewCell {
-//        let idenntifire = String(describing: classCell.self)
-//        let cell = dequeueReusableCell(withIdentifier: idenntifire, for: indexPath)
-//
-//        //model.setupAny(cell: cell)
-//        return cell
-//    }
     func dequeueReusableCell (withModel model: CellViewAnyModel, for indexPath: IndexPath) -> UICollectionViewCell {
         let identifire = String(describing: type(of: model).cellAnyType)
         let cell = dequeueReusableCell(withReuseIdentifier: identifire, for: indexPath)

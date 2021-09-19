@@ -14,13 +14,11 @@ class DegreesTVCell: UITableViewCell {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var typeWeatherLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
-    
     var viewModel: DegreesTVModel? {
         didSet {
             updateUI()
         }
     }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -33,9 +31,7 @@ class DegreesTVCell: UITableViewCell {
         typeWeatherLabel.text = ""
         weatherImage.image = nil
     }
-    
     func updateUI() {
-        
         guard let viewModel = viewModel else {return}
         valueDegreesLabel.text = viewModel.degreesNow
         valueDegreesLabel.isHidden = viewModel.isLoading
@@ -46,17 +42,13 @@ class DegreesTVCell: UITableViewCell {
         } else {
             indicatorView.stopAnimating()
         }
-        
         switch viewModel.type {
         case .rain:
             weatherImage.image = R.image.rain()
         case .сlouds:
             weatherImage.image = R.image.cloudy()
-            
         case .none:
             weatherImage.image = nil
         }
-        
     }
-    
 }

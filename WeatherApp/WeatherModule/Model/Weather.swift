@@ -4,7 +4,7 @@
 //
 //  Created by Nikolay Mikhaylov on 07.09.2021.
 //
-
+// swiftlint:disable all
 import Foundation
 
 var dateToHourFormatter: DateFormatter = {

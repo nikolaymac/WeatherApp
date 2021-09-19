@@ -11,13 +11,11 @@ class SunTVCell: UITableViewCell {
 
     @IBOutlet weak var sunRise: UILabel!
     @IBOutlet weak var sunSet: UILabel!
-    
     var viewModel: SunTVModel! {
         didSet {
             updateUI()
         }
     }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none

@@ -40,7 +40,8 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     public var locationInProgress: Bool {
-        if locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse {
+        if locationManager.authorizationStatus == .authorizedAlways ||
+           locationManager.authorizationStatus == .authorizedWhenInUse {
             return true
         } else {
             return false
@@ -56,6 +57,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             self.locationSaved = newValue
         }
     }
+    public var errorGetAuthorizationStatus: (() -> Void)?
     public var currentLocationWasSet: (() -> Void)?
    
     override init() {
@@ -80,9 +82,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .restricted:
-            print("Location access was restricted.")
+            errorGetAuthorizationStatus?()
         case .denied:
-            print("User denied access to location.")
+            errorGetAuthorizationStatus?()
+            
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .authorizedAlways:

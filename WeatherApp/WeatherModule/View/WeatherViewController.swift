@@ -12,6 +12,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.delegate = self
             tableView.register(nibModels: [DegreesTVCell.self, DegreesByHoursTVCell.self, DailyTVCell.self, SunTVCell.self])
         }
     }
@@ -22,22 +23,75 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         setupScreen()
     }
-    
-    func setupScreen() {
-        let blueColor = UIColor(red: 0.039, green: 0.606, blue: 0.925, alpha: 1)
-        self.view.backgroundColor = blueColor
-        tableView.backgroundColor = .clear
-        tableView.estimatedRowHeight = 220
+    func updateData(error: WeatherError? = nil) {
+        if error != nil {
+            showErrorVC(error: error)
+//            switch error {
+//            case .noInternetConnection:
+//                showErrorVC(error: "We have problem with internet!")
+//            case .dataFailure:
+//                showErrorVC(error: "Fail receive data")
+//            default:
+//                break
+//            }
+        }
        
-        refreshControl.bounds = CGRect(x: refreshControl.bounds.origin.x, y: 0,
+        refreshControl.endRefreshing()
+        tableView?.reloadData()
+        if let header = tableView.tableHeaderView as? MyCustomHeader {
+            header.viewModel = model.modelDegrees()
+            view.setNeedsLayout()
+        }
+    }
+    func setupScreen() {
+      
+        tableView.estimatedRowHeight = 220
+        let headerView = MyCustomHeader(reuseIdentifier: "sectionHeader")
+        headerView.viewModel = model.modelDegrees()
+        
+        tableView.tableHeaderView = headerView 
+
+        refreshControl.bounds = CGRect(x: refreshControl.bounds.origin.x, y: 50,
                                        width: refreshControl.bounds.size.width,
                                        height: refreshControl.bounds.size.height)
         refreshControl.addTarget(model, action: #selector(model.refreshData), for: .valueChanged)
         tableView.addSubview(refreshControl)
         tableView.sendSubviewToBack(refreshControl)
+        setupData()
+    }
+    
+    func setupData() {
         model.loadData()
     }
-   
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let headerView = tableView.tableHeaderView {
+
+            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+            var headerFrame = headerView.frame
+
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                tableView.tableHeaderView = headerView
+            }
+        }
+    }
+
+    func showErrorVC(error: WeatherError?) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ErrorViewController") as? ErrorViewController {
+            vc.error = error
+            DispatchQueue.main.async {
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+       
+    }
+    @IBAction func unwindToWeather(_ unwindSegue: UIStoryboardSegue) {
+        setupData()
+    }
+
 }
 extension WeatherViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,14 +101,10 @@ extension WeatherViewController: UITableViewDataSource, UITableViewDelegate {
         model.numberOfRowsInSection(section)
         
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let modelCell: CellViewAnyModel = model.setupModelForCellAt(indexPath)
         return tableView.dequeueReusableCell(withModel: modelCell, for: indexPath)
       
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
     }
 }

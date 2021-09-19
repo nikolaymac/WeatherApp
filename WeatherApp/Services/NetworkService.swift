@@ -11,7 +11,6 @@ import Moya
 enum NetworkService {
     case getWeather(lat: Float?, lon: Float?)
 }
-
 extension NetworkService: TargetType {
     
   public var baseURL: URL {
